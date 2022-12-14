@@ -1,0 +1,11 @@
+:imagesdir: ./images
+:toc: macro
+:toclevels: 3
+:hide-uri-scheme:
+:sectnums:
+
+= Useful Information
+
+- link:https://serenity-bdd.github.io/docs/tutorials/rest[REST-APIs using serenity-rest-assured]
+
+- link:https://johnfergusonsmart.com/working-rest-apis-using-serenity-screenplay/[REST-APIs using serenity-screenplay-rest]

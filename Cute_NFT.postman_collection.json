@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "83c89bc2-a220-4641-b43c-6e8a47fb7dc6",
+		"name": "Cute NFT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"item": [
+				{
+					"name": "Register first user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "pub-key",
+								"value": "{{pub_key_user1}}",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userName\": \"Mighty Bruce\"}"
+						},
+						"url": {
+							"raw": "{{host}}/api/account/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register second user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "pub-key",
+								"value": "{{pub_key_user2}}",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userName\": \"Magic James\"}"
+						},
+						"url": {
+							"raw": "{{host}}/api/account/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "global",
+			"item": [
+				{
+					"name": "Show all transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/cute/transactions",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"cute",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show living Octopuses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/cute/octopuses",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"cute",
+								"octopuses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show registered Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/cute/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"cute",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show a single Octopus by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/cute/octopus/0000de39-0000-1000-8000-00805f9b34fb",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"cute",
+								"octopus",
+								"0000de39-0000-1000-8000-00805f9b34fb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

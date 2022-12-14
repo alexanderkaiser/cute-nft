@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.kal.cute</groupId>
+  <artifactId>cute-nft</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <url>http://maven.apache.org</url>
+  <packaging>pom</packaging>
+  <name>Cute-NFT</name>
+  <description>Cute-NFT is a fictional NFT octopus trading platform for educational purposes</description>
+
+  <properties>
+    <junit.version>5.9.0</junit.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.24</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.4.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>junit-vintage-engine</artifactId>
+      <groupId>org.junit.vintage</groupId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <modules>
+    <module>server</module>
+    <module>octopus</module>
+    <module>crypto</module>
+    <module>rest-data</module>
+    <module>client</module>
+    <module>bdd-testsuite</module>
+  </modules>
+</project>
