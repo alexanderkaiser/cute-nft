@@ -1,7 +1,5 @@
 package net.kal.cute.server.ctx;
 
-import static java.text.MessageFormat.format;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +78,7 @@ public class OctopusService {
     return this.octopusOwnerships.values().stream().toList();
   }
 
-  public Optional<OctopusOwnership> getOctopusByIdResponse(String id) {
+  public Optional<OctopusOwnership> getOctopusOwnershipById(String id) {
     return this.getOctopusOwnerships().stream()
         .filter(oos -> oos.getOctopuses().stream().anyMatch(octo -> octo.getIdentifier().equals(id)))
         .map(
@@ -96,7 +94,7 @@ public class OctopusService {
   }
 
   public Optional<Octopus> getOctopusById(String id) {
-    val optOwnership = this.getOctopusByIdResponse(id);
+    val optOwnership = this.getOctopusOwnershipById(id);
     if (optOwnership.isEmpty()) {
       return Optional.empty();
     }
