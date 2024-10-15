@@ -24,7 +24,7 @@ public class Main {
         System.out.println("Offspring: " + offspring);
 
         val img = factory.createAvatar(offspring);
-        File outputfile = new File(format("offspring_{0}.png", i));
+        val outputfile = new File(format("offspring_{0}.png", i));
         System.out.println(outputfile.getAbsolutePath());
         ImageIO.write(img, "png", outputfile);
 
