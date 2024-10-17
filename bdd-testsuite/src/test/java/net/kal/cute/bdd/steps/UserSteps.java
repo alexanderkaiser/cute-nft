@@ -1,25 +1,32 @@
 package net.kal.cute.bdd.steps;
 
-import static java.text.MessageFormat.format;
+import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
+import static net.serenitybdd.screenplay.GivenWhenThen.then;
+import static net.serenitybdd.screenplay.GivenWhenThen.when;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.de.Angenommen;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import net.kal.cute.client.CuteClientImpl;
-import net.kal.cute.client.rest.Registration;
-import net.kal.cute.crypto.CryptoKeyFactory;
-import net.serenitybdd.rest.SerenityRest;
+import net.kal.cute.bdd.TestcaseData;
+import net.kal.cute.bdd.abilities.RememberInventory;
+import net.kal.cute.bdd.abilities.UseTheCuteClient;
+import net.kal.cute.bdd.questions.AskForInventory;
+import net.kal.cute.bdd.tasks.RegisterWithTheCuteService;
 import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.ensure.Ensure;
 
 @Slf4j
 public class UserSteps {
 
+  private TestcaseData data;
+
   @Before
   public void setUp() {
     OnStage.setTheStage(Cast.ofStandardActors());
+    data = new TestcaseData();
   }
 
   @After
@@ -27,17 +34,34 @@ public class UserSteps {
     OnStage.drawTheCurtain();
   }
 
-  @Angenommen("^der Benutzer (.+) meldet sich an$")
+
+  @Angenommen("^der Benutzer (.+) meldet sich an mit seinem Benutzernamen an$")
   public void user(String username) {
     val theUser = OnStage.theActor(username);
-    log.info(format("Perform some actions with {0}", username));
 
-    val client1 =
-        CuteClientImpl.forUrl("http://localhost:8080")
-            .with(CryptoKeyFactory.generateRandomKeyPair())
-            .andCustomSpec(SerenityRest::given);
+    givenThat(theUser.can(UseTheCuteClient.with(data.createClientFor(username))));
+    givenThat(theUser.can(RememberInventory.forHisAccount()));
 
-    val response = client1.request(Registration.withUsername(username));
-    log.info(format("Registration Response: {0}", response));
+    when(theUser).attemptsTo(RegisterWithTheCuteService.withUsername());
+  }
+
+  @Angenommen("^der Benutzer (.+) meldet sich mit einem vom System generierten Benutzernamen an$")
+  public void userRegisterWithRandomName(String username) {
+    val theUser = OnStage.theActor(username);
+    givenThat(theUser.can(UseTheCuteClient.with(data.createClient())));
+    givenThat(theUser.can(RememberInventory.forHisAccount()));
+
+    when(theUser).attemptsTo(RegisterWithTheCuteService.withSystemGeneratedUsername());
+  }
+
+  @Angenommen("^der Benutzer (.+) meldet sich mit dem Benutzername ''(.*)'' an$")
+  public void userRegisterWithCustomName(String actorName, String userName) {
+    val theUser = OnStage.theActor(actorName);
+    givenThat(theUser.can(UseTheCuteClient.with(data.createClient())));
+    givenThat(theUser.can(RememberInventory.forHisAccount()));
+
+    when(theUser).attemptsTo(
+        RegisterWithTheCuteService.withCustomProperties().providingCustomName("abc")
+            .withSeedForRSA(123).withCustomUsername(userName));
   }
 }
